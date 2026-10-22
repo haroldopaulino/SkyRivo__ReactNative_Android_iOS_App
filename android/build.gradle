@@ -1,0 +1,26 @@
+// Owner: Harold Paulino
+buildscript {
+    ext {
+        buildToolsVersion = "36.0.0"
+        minSdkVersion = 24
+        compileSdkVersion = 36
+        targetSdkVersion = 35
+        ndkVersion = "27.1.12297006"
+        kotlinVersion = "2.4.10"
+    }
+    repositories { google(); mavenCentral() }
+    dependencies {
+        classpath("com.android.tools.build:gradle:9.0.1")
+        classpath("com.facebook.react:react-native-gradle-plugin")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.4.10")
+    }
+}
+apply plugin: "com.facebook.react.rootproject"
+
+subprojects { subproject ->
+    if (subproject.name in ["react-native-video", "react-native-async-storage_async-storage", "react-native-community_slider", "react-native-fs"]) {
+        subproject.tasks.withType(JavaCompile).configureEach {
+            options.compilerArgs += ["-nowarn", "-Xlint:none", "-XDsuppressNotes"]
+        }
+    }
+}

@@ -1,0 +1,28 @@
+{
+ archiveVersion = 1;
+ classes = {};
+ objectVersion = 56;
+ objects = {
+  A00000000000000000000001 = {isa = PBXProject; attributes = {LastUpgradeCheck = 1600;}; buildConfigurationList = A00000000000000000000002; compatibilityVersion = "Xcode 15.0"; developmentRegion = en; hasScannedForEncodings = 0; knownRegions = (en, Base); mainGroup = A00000000000000000000003; productRefGroup = A00000000000000000000004; projectDirPath = ""; projectRoot = ""; targets = (A00000000000000000000005,); };
+  A00000000000000000000002 = {isa = XCConfigurationList; buildConfigurations = (A00000000000000000000006, A00000000000000000000007,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+  A00000000000000000000003 = {isa = PBXGroup; children = (A00000000000000000000008, A00000000000000000000004,); sourceTree = "<group>"; };
+  A00000000000000000000004 = {isa = PBXGroup; children = (A00000000000000000000009,); name = Products; sourceTree = "<group>"; };
+  A00000000000000000000005 = {isa = PBXNativeTarget; buildConfigurationList = A0000000000000000000000A; buildPhases = (A0000000000000000000000B, A0000000000000000000000C, A0000000000000000000000D,); buildRules = (); dependencies = (); name = SkyRivo; productName = SkyRivo; productReference = A00000000000000000000009; productType = "com.apple.product-type.application"; };
+  A00000000000000000000006 = {isa = XCBuildConfiguration; buildSettings = { }; name = Debug; };
+  A00000000000000000000007 = {isa = XCBuildConfiguration; buildSettings = { }; name = Release; };
+  A00000000000000000000008 = {isa = PBXGroup; children = (A0000000000000000000000E, A0000000000000000000000F, A00000000000000000000010,); path = SkyRivo; sourceTree = "<group>"; };
+  A00000000000000000000009 = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkyRivo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+  A0000000000000000000000A = {isa = XCConfigurationList; buildConfigurations = (A00000000000000000000011, A00000000000000000000012,); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+  A0000000000000000000000B = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A00000000000000000000013,); runOnlyForDeploymentPostprocessing = 0; };
+  A0000000000000000000000C = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (A00000000000000000000014,); runOnlyForDeploymentPostprocessing = 0; };
+  A0000000000000000000000D = {isa = PBXShellScriptBuildPhase; buildActionMask = 2147483647; files = (); inputPaths = (); name = "Bundle React Native code and images"; outputPaths = (); runOnlyForDeploymentPostprocessing = 0; shellPath = /bin/sh; shellScript = "set -e\nWITH_ENVIRONMENT=../node_modules/react-native/scripts/xcode/with-environment.sh\nREACT_NATIVE_XCODE=../node_modules/react-native/scripts/react-native-xcode.sh\n/bin/sh -c \"$WITH_ENVIRONMENT $REACT_NATIVE_XCODE\"\n"; };
+  A0000000000000000000000E = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+  A0000000000000000000000F = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+  A00000000000000000000010 = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+  A00000000000000000000011 = {isa = XCBuildConfiguration; buildSettings = { ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; CLANG_ENABLE_MODULES = YES; CURRENT_PROJECT_VERSION = 1; DEVELOPMENT_TEAM = ""; INFOPLIST_FILE = SkyRivo/Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 15.1; LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks"); PRODUCT_BUNDLE_IDENTIFIER = com.skyrivo; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Debug; };
+  A00000000000000000000012 = {isa = XCBuildConfiguration; buildSettings = { ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; CLANG_ENABLE_MODULES = YES; CURRENT_PROJECT_VERSION = 1; DEVELOPMENT_TEAM = ""; INFOPLIST_FILE = SkyRivo/Info.plist; IPHONEOS_DEPLOYMENT_TARGET = 15.1; LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks"); PRODUCT_BUNDLE_IDENTIFIER = com.skyrivo; PRODUCT_NAME = "$(TARGET_NAME)"; SWIFT_VERSION = 5.0; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Release; };
+  A00000000000000000000013 = {isa = PBXBuildFile; fileRef = A0000000000000000000000E; };
+  A00000000000000000000014 = {isa = PBXBuildFile; fileRef = A0000000000000000000000F; };
+ };
+ rootObject = A00000000000000000000001;
+}

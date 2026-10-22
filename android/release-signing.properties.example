@@ -1,0 +1,4 @@
+SKYRIVO_KEYSTORE_FILE=/absolute/path/to/skyrivo-release.keystore
+SKYRIVO_KEYSTORE_PASSWORD=replace_me
+SKYRIVO_KEY_ALIAS=skyrivo
+SKYRIVO_KEY_PASSWORD=replace_me

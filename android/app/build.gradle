@@ -1,0 +1,34 @@
+// Owner: Harold Paulino
+apply plugin: "com.android.application"
+apply plugin: "org.jetbrains.kotlin.android"
+apply plugin: "com.facebook.react"
+react { autolinkLibrariesWithApp() }
+def enableProguardInReleaseBuilds = false
+android {
+    buildFeatures { resValues = true }
+    namespace = "com.skyrivo"
+    compileSdk = rootProject.ext.compileSdkVersion
+    ndkVersion = rootProject.ext.ndkVersion
+    defaultConfig { applicationId = "com.skyrivo"; minSdk = rootProject.ext.minSdkVersion; targetSdk = rootProject.ext.targetSdkVersion; versionCode = 1; versionName = "1.0" }
+    splits { abi { reset(); enable = false; universalApk = false } }
+    signingConfigs {
+        release {
+            def storeFilePath = System.getenv("SKYRIVO_KEYSTORE_FILE") ?: project.findProperty("SKYRIVO_KEYSTORE_FILE")
+            def storePass = System.getenv("SKYRIVO_KEYSTORE_PASSWORD") ?: project.findProperty("SKYRIVO_KEYSTORE_PASSWORD")
+            def keyAliasValue = System.getenv("SKYRIVO_KEY_ALIAS") ?: project.findProperty("SKYRIVO_KEY_ALIAS")
+            def keyPass = System.getenv("SKYRIVO_KEY_PASSWORD") ?: project.findProperty("SKYRIVO_KEY_PASSWORD")
+            if (storeFilePath && storePass && keyAliasValue && keyPass) {
+                storeFile = file(storeFilePath)
+                storePassword = storePass
+                keyAlias = keyAliasValue
+                keyPassword = keyPass
+            }
+        }
+    }
+    def releaseSigningConfigured = signingConfigs.release.storeFile != null
+    buildTypes {
+        debug { }
+        release { signingConfig releaseSigningConfigured ? signingConfigs.release : signingConfigs.debug; minifyEnabled enableProguardInReleaseBuilds; proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro" }
+    }
+}
+dependencies { implementation("com.facebook.react:react-android"); if (hermesEnabled.toBoolean()) { implementation("com.facebook.react:hermes-android") } else { implementation("org.webkit:android-jsc:+") } }
