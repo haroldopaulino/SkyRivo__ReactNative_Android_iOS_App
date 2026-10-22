@@ -9,9 +9,6 @@ SkyRivo brings a weather-focused product originally developed as a native Kotlin
 
 <img width="1122" height="1402" alt="skyrivo-weather-showcase" src="https://github.com/user-attachments/assets/a4b71889-6e8d-4230-8acb-00f3872984c9" />
 
-
-*To display this image in GitHub, add the supplied marketing graphic at `docs/images/skyrivo-weather-showcase.png`.*
-
 ## Highlights
 
 - **Current conditions by US city:** Search a city and display its latest weather through the OpenWeather API.
