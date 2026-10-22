@@ -22,8 +22,6 @@ SkyRivo brings a weather-focused product originally developed as a native Kotlin
 
 The screenshot below represents the actual SkyRivo interface, including a search for **Clearfield, UT** and a current-conditions card. The values are an example captured at a specific moment, not a live weather forecast.
 
-*Add the provided screenshot at `docs/images/skyrivo-app-screenshot.png` to show the real UI.*
-
 ## Technology stack
 
 | Area | Implementation |
