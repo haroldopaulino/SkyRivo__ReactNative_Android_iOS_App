@@ -1,79 +1,185 @@
-# SkyRivo — React Native Android & iOS
+# SkyRivo — React Native Weather App for Android & iOS
 
-Cross-platform conversion of the SkyRivo native Android weather app, using the working AudiVix React Native 0.82.1 host project as the Android/iOS starting point. Owner: Harold Paulino.
+**A cross-platform weather experience built with React Native and TypeScript, featuring live OpenWeather conditions, US city search, current-location lookup, saved search preferences, and a unified dark interface for Android and iOS.**
 
-## Implemented
+SkyRivo brings a weather-focused product originally developed as a native Kotlin/Jetpack Compose Android application to a shared React Native codebase. Both implementations preserve the same recognizable experience: a clean city search, prominent current temperature and weather icon, and a concise dashboard of useful conditions.
 
-- Dark weather screen matching the native Android app's general structure
-- Search for current weather by US city (OpenWeather)
-- Device current-location weather and permission request
-- Fallback to saved last city if location cannot be retrieved
-- Last searched city persisted with AsyncStorage
-- Temperature, feels-like, low/high, humidity, wind, pressure, updated timestamp, and weather icons
-- Android and iOS host projects with appropriate location permissions
+> **Project status:** Cross-platform implementation with Android and iOS host projects. The repository notes that native build and runtime validation were not completed in its documented environment. This is a portfolio/source project, not a claim of publication in an app store.
 
-## Setup
+## Preview
 
-1. The native Android test OpenWeather key is configured in `src/config.ts`. Replace it with a production-ready configuration before publishing.
-2. Install Node.js 20.19.4+ and project dependencies: `npm install`.
-3. Android: `npm run android` from the root with an emulator or device ready. The Android Gradle wrapper is included in this project.
-4. iOS (macOS): `cd ios && pod install && cd ..`, then `npm run ios`.
-5. Android release: `npm run build:android:release` (the inherited reference project signs with debug keys; configure release signing before distribution).
+<img width="1122" height="1402" alt="skyrivo-weather-showcase" src="https://github.com/user-attachments/assets/a4b71889-6e8d-4230-8acb-00f3872984c9" />
 
-## Notes
 
-Native builds and runtime behavior have not been verified in this environment. The underlying platform configuration originates from the provided AudiVix archive; adjust deployment IDs, signing, icons, and iOS release setup prior to publishing. For a production API key, use a protected server-side proxy instead of a key shipped in the app bundle.
+*To display this image in GitHub, add the supplied marketing graphic at `docs/images/skyrivo-weather-showcase.png`.*
 
-## One-command release deployment
+## Highlights
 
-From the project root:
+- **Current conditions by US city:** Search a city and display its latest weather through the OpenWeather API.
+- **Location-aware lookup:** Request location permission and fetch conditions for device coordinates.
+- **Saved city fallback:** Restore the most recently searched city using AsyncStorage when location is unavailable.
+- **Useful weather details:** Temperature, description and icon, feels-like temperature, low/high, humidity, wind speed, pressure, and observation/update time.
+- **Consistent cross-platform UI:** Dark navy weather dashboard with cyan accents and a prominent summary card on both Android and iOS.
+- **Native platform integration:** Dedicated Android and iOS host projects and platform-specific location permissions.
+- **Release-oriented workflows:** Repository scripts for Android release APK build/deployment and an iOS release-build script.
+
+## Real app screen
+
+The screenshot below represents the actual SkyRivo interface, including a search for **Clearfield, UT** and a current-conditions card. The values are an example captured at a specific moment, not a live weather forecast.
+
+*Add the provided screenshot at `docs/images/skyrivo-app-screenshot.png` to show the real UI.*
+
+## Technology stack
+
+| Area | Implementation |
+| --- | --- |
+| Framework | React Native 0.82.1 |
+| Language | TypeScript |
+| UI runtime | React 19.1.1 |
+| Weather source | OpenWeather API |
+| Current location | `@react-native-community/geolocation` |
+| Stored preferences | `@react-native-async-storage/async-storage` |
+| Safe-area layout | `react-native-safe-area-context` |
+| Android | Native Gradle/Android host project |
+| iOS | Native Xcode/CocoaPods host project |
+| Tooling | Metro, Babel, TypeScript, React Native CLI |
+
+## Architecture and request flow
+
+```text
+        React Native weather screen
+                   |
+         City search or GPS lookup
+                   |
+        Location permission / saved city
+                   |
+             OpenWeather API
+                   |
+             Weather response
+                   |
+      Dark weather summary + detail panel
+                   |
+         Save last city to AsyncStorage
+```
+
+The React Native edition intentionally reproduces the user-facing behavior of the [native SkyRivo Android application](https://github.com/haroldopaulino/SkyRivo__Android_App), but its implementation is different. **React Native/TypeScript and AsyncStorage are used here; Kotlin, Jetpack Compose, Retrofit, Koin, and DataStore belong to the native Android repository and should not be described as this repository's application stack.**
+
+## Project structure
+
+```text
+SkyRivo__ReactNative_Android_iOS_App/
+├── android/               # Android host/build configuration
+├── ios/                   # iOS host/build configuration
+├── src/                   # Shared TypeScript application logic/UI
+├── scripts/               # Platform setup and release tooling
+├── package.json
+├── README.md
+└── ...
+```
+
+## Getting started
+
+### Prerequisites
+
+- Node.js **20.19.4 or newer**
+- npm and the project's React Native dependencies
+- Android Studio, Android SDK and appropriate JDK for Android development
+- macOS, Xcode and CocoaPods for iOS development
+- An OpenWeather API credential
+
+### Configure the API
+
+The repository README states that an Android test OpenWeather key is configured in `src/config.ts`. Replace the test configuration before distribution. **A key included in an app bundle is not a secret**; for stronger production control use a server-side proxy with appropriate restrictions, throttling, and monitoring.
+
+### Install dependencies
 
 ```bash
 npm install
-npm run deploy:android:release
 ```
 
-If multiple devices are connected, specify one:
+### Run on Android
 
 ```bash
-npm run deploy:android:release -- --device R58R77TZLQZ
-# Or use the same positional-device syntax as AudiVix:
-./scripts/build-install-release.sh R58R77TZLQZ
+npm run android
 ```
 
-To build the APK without installing it:
+Use an Android emulator or connected device, and grant location permission if testing location-based weather.
+
+### Run on iOS (macOS)
+
+```bash
+cd ios
+pod install
+cd ..
+npm run ios
+```
+
+Use a compatible simulator or iPhone and allow location permission when prompted.
+
+### Useful development commands
+
+```bash
+npm start                 # Start Metro
+npm run typecheck         # TypeScript validation
+npm run check:android     # Validate Android project configuration
+```
+
+## Android release APK
+
+To build an Android release APK without installing it:
 
 ```bash
 npm run build:android:release
 ```
 
-The Android APK is written to `android/app/build/outputs/apk/release/app-release.apk`.
-
-The release build uses debug signing by default **for local sideloading only**. For distribution, configure a permanent release keystore and provide `SKYRIVO_KEYSTORE_FILE`, `SKYRIVO_KEYSTORE_PASSWORD`, `SKYRIVO_KEY_ALIAS`, and `SKYRIVO_KEY_PASSWORD` as environment variables or Gradle properties. The file `android/release-signing.properties.example` lists the expected values; never commit actual credentials. A production build signed with a different key cannot update a debug-signed installation without uninstalling it first.
-
-Build the iOS simulator Release app on macOS with Xcode and CocoaPods installed:
+To build and deploy it using the repository script:
 
 ```bash
-npm run build:ios:release
-```
-
-Deploying a signed build to a physical iPhone or the App Store requires Apple signing setup in Xcode.
-
-## Android release Gradle version
-
-The Android Gradle Plugin is pinned to 9.0.1, so the Gradle wrapper must be 9.1 or newer. This project includes Gradle **9.8.1**, matching the working AudiVix reference project. The release script validates the wrapper setting before starting the build.
-
-If a build reports `Current version is 8.14.3`, replace the old local `android/gradle/wrapper/gradle-wrapper.properties` with the file in this ZIP. Confirm from your project root with:
-
-```bash
-cd android
-./gradlew --version
-cd ..
 npm run deploy:android:release
 ```
 
-Use the wrapper (`./gradlew`), not a globally installed `gradle` command.
+If several Android devices are connected, pass a device selector as documented in the project's release script. The repository documents the output path as:
 
-## iOS safe area and appearance
+```text
+android/app/build/outputs/apk/release/app-release.apk
+```
 
-SkyRivo uses `react-native-safe-area-context` for both iOS and Android top/bottom screen insets. The iOS app enforces dark appearance and a light status-bar clock and icons. iOS location permission uses `NSLocationWhenInUseUsageDescription` in `ios/SkyRivo/Info.plist`.
+**Release caution:** The original repository documentation says the inherited release setup uses debug signing. Configure proper release credentials and independently validate the build before any public distribution.
+
+For iOS, the repository declares `npm run build:ios:release`; ensure signing, capabilities, bundle identity, native dependencies and target configuration are validated in Xcode.
+
+## Relationship to native Android SkyRivo
+
+| Capability | Native Android app | React Native app |
+| --- | --- | --- |
+| UI | Kotlin + Jetpack Compose / Material 3 | Shared React Native / TypeScript UI |
+| City-based current weather | OpenWeather | OpenWeather |
+| Weather at current coordinates | Android location integration | React Native geolocation integration |
+| Saved city/preferences | Android DataStore | AsyncStorage |
+| Android support | Yes | Yes |
+| iOS support | No | iOS host project included |
+
+The cross-platform conversion demonstrates how to maintain **consistent product behavior and visual identity** while choosing a different delivery architecture.
+
+## Engineering value
+
+SkyRivo highlights practical mobile development skills that translate to real product teams: REST API integration, typed cross-platform development, runtime permissions, persistent settings, user-facing error/fallback flows, native project maintenance, and coordinated Android/iOS feature delivery. Having both a native Android and React Native implementation also provides a useful basis for comparing development velocity, UI consistency, platform-specific integration, and long-term maintenance tradeoffs.
+
+## Verification and roadmap
+
+The checked-in documentation states that native builds and runtime behavior were **not verified in the original development environment**. Suggested validation before publishing includes Android and iOS device testing, API error handling, permission denial behavior, city fallback behavior, signing, application identifiers and platform-specific configuration.
+
+Potential improvements include automated tests for weather response mapping, retry/timeout messaging, accessibility review, offline cache for the last successful forecast, CI checks, and production API-key protection.
+
+## Author
+
+**Haroldo Paulino**  
+[GitHub profile](https://github.com/haroldopaulino) · [Portfolio](https://appdevdesign.com/harold/)
+
+## Related project
+
+- [SkyRivo — Native Android (Kotlin / Jetpack Compose)](https://github.com/haroldopaulino/SkyRivo__Android_App)
+
+## License
+
+Refer to the `LICENSE` file in this repository for applicable terms.
