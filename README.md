@@ -4,8 +4,7 @@
 
 SkyRivo brings a weather-focused product originally developed as a native Kotlin/Jetpack Compose Android application to a shared React Native codebase. Both implementations preserve the same recognizable experience: a clean city search, prominent current temperature and weather icon, and a concise dashboard of useful conditions.
 
-> **Project status:** Cross-platform implementation with Android and iOS host projects. The repository notes that native build and runtime validation were not completed in its documented environment. This is a portfolio/source project, not a claim of publication in an app store.
-
+> **Project status:** Cross-platform implementation with Android and iOS host projects. The repository notes that native build and runtime validation were not completed in its documented environment.
 ## Preview
 
 <img width="1122" height="1402" alt="skyrivo-weather-showcase" src="https://github.com/user-attachments/assets/a4b71889-6e8d-4230-8acb-00f3872984c9" />
@@ -144,8 +143,6 @@ If several Android devices are connected, pass a device selector as documented i
 android/app/build/outputs/apk/release/app-release.apk
 ```
 
-**Release caution:** The original repository documentation says the inherited release setup uses debug signing. Configure proper release credentials and independently validate the build before any public distribution.
-
 For iOS, the repository declares `npm run build:ios:release`; ensure signing, capabilities, bundle identity, native dependencies and target configuration are validated in Xcode.
 
 ## Relationship to native Android SkyRivo
@@ -164,12 +161,6 @@ The cross-platform conversion demonstrates how to maintain **consistent product 
 ## Engineering value
 
 SkyRivo highlights practical mobile development skills that translate to real product teams: REST API integration, typed cross-platform development, runtime permissions, persistent settings, user-facing error/fallback flows, native project maintenance, and coordinated Android/iOS feature delivery. Having both a native Android and React Native implementation also provides a useful basis for comparing development velocity, UI consistency, platform-specific integration, and long-term maintenance tradeoffs.
-
-## Verification and roadmap
-
-The checked-in documentation states that native builds and runtime behavior were **not verified in the original development environment**. Suggested validation before publishing includes Android and iOS device testing, API error handling, permission denial behavior, city fallback behavior, signing, application identifiers and platform-specific configuration.
-
-Potential improvements include automated tests for weather response mapping, retry/timeout messaging, accessibility review, offline cache for the last successful forecast, CI checks, and production API-key protection.
 
 ## Author
 
