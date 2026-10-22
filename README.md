@@ -4,7 +4,6 @@
 
 SkyRivo brings a weather-focused product originally developed as a native Kotlin/Jetpack Compose Android application to a shared React Native codebase. Both implementations preserve the same recognizable experience: a clean city search, prominent current temperature and weather icon, and a concise dashboard of useful conditions.
 
-> **Project status:** Cross-platform implementation with Android and iOS host projects. The repository notes that native build and runtime validation were not completed in its documented environment.
 ## Preview
 
 <img width="1122" height="1402" alt="skyrivo-weather-showcase" src="https://github.com/user-attachments/assets/a4b71889-6e8d-4230-8acb-00f3872984c9" />
